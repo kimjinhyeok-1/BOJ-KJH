@@ -4,7 +4,8 @@ This is an auto push repository for Baekjoon Online Judge created with [Baekjoon
 
 [![Solved.ac Profile](http://mazassumnida.wtf/api/v2/generate_badge?boj=jinxxang)](https://solved.ac/jinxxang)
 
-![mazandi](http://mazandi.herokuapp.com/api?handle=jinxxang&theme=warm)
+[![mazandi](http://mazandi.herokuapp.com/api?handle=jinxxang&theme=warm)](https://solved.ac/jinxxang)
+
 
 ### Algorithm
 - BOJ: jinxxang
