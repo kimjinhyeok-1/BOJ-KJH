@@ -1,0 +1,18 @@
+import sys
+input = sys.stdin.readline
+
+n = int(input())
+d = []
+for _ in range(n):
+    st, end = map(int, input().split())
+    d.append((st, end))
+
+d.sort(key= lambda x: (x[1], x[0]))
+
+count = 0
+last_end = 0
+for a, b in d:
+    if a >= last_end:
+        last_end = b
+        count += 1
+print(count)
