@@ -1,17 +1,10 @@
-#1,3,5,7,8,10,12 -> 31일
-#4,6,9,11 -> 30일
-#2 -> 28일
 import sys
 input = sys.stdin.readline
 
-month, day = map(int, input().split())
-k = [0,30,58,89,119,150,180,211,242,272,303,333,364]
-ans = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
-total_day = k[month-1] + day
+m, d = map(int, input().split())
 
-if month == 1:
-    p = (total_day-1) % 7
-    print(ans[p])
-else:
-    p = (total_day) % 7
-    print(ans[p])
+# 2007년은 1/1이 MON
+days_before = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334]  # 각 월 시작 전까지 누적 일수
+ans = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
+
+print(ans[(days_before[m-1] + (d-1)) % 7])
