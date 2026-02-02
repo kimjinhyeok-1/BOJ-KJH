@@ -8,8 +8,8 @@ dist = [[[-1] * (K+1) for _ in range(M)] for _ in range(N)] # 접근 시 dist[N]
 d = [(1,0),(-1,0),(0,1),(0,-1)]
 
 
-dist[0][0][K] = 1
-q = deque([(0,0,K)])
+dist[0][0][0] = 1
+q = deque([(0,0,0)])
 
 while q:
     
@@ -25,7 +25,7 @@ while q:
         if grid[ny][nx] == 0 and dist[ny][nx][broken] == -1:
             dist[ny][nx][broken] = cur + 1
             q.append((nx,ny,broken))
-        elif grid[ny][nx] == 1 and 0<broken and dist[ny][nx][broken-1] == -1:
-            dist[ny][nx][broken - 1] = cur + 1
-            q.append((nx,ny,broken - 1))
+        elif grid[ny][nx] == 1 and broken<K and dist[ny][nx][broken+1] == -1:
+            dist[ny][nx][broken + 1] = cur + 1
+            q.append((nx,ny,broken + 1))
 print(-1)
