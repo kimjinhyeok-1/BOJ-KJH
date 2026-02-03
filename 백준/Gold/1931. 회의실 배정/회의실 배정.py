@@ -2,11 +2,7 @@ import sys
 input = sys.stdin.readline
 
 n = int(input())
-d = []
-for _ in range(n):
-    st, end = map(int, input().split())
-    d.append((st, end))
-
+d = [list(map(int, input().split())) for _ in range(n)]
 d.sort(key= lambda x: (x[1], x[0]))
 
 count = 0
