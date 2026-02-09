@@ -2,17 +2,13 @@ import sys
 input = sys.stdin.readline
 n,m = map(int, input().split())
 num = list(map(int,input().split()))
-p = [0] * n
-p[0] = num[0]
-for i in range(1,n):
-    p[i] = p[i-1] + num[i]
-k = [0] * m
-for x in p:
-    k[x%m] += 1
-ans = 0
-
-k[0] += 1
-for y in k:
-    ans += (y*(y-1))//2
-
-print(ans)
+p = [0] * m
+p[0] = 1
+count = 0
+cur = 0
+for x in num:
+    cur = (cur + x) % m
+    p[cur] += 1
+for y in p:
+    count += y * (y-1)//2
+print(count)
