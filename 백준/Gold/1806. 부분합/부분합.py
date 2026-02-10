@@ -14,5 +14,4 @@ for r in range(n):
         sum -= nums[l]
         l+=1
 
-if ans == INF: print(0)
-else: print(ans)
+print( 0 if ans == INF else ans)
