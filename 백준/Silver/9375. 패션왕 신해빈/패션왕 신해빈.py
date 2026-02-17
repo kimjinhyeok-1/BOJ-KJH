@@ -1,15 +1,16 @@
 import sys
+from collections import defaultdict
 input = sys.stdin.readline
 
 T = int(input())
 
 for _ in range(T):
     n = int(input())
-    counts = {}
+    dict = defaultdict(int)
     for _ in range(n):
-        name, kind = input().split()
-        counts[kind] = counts.get(kind, 0) + 1
+        a, b = input().split()
+        dict[b] += 1
     ans = 1
-    for kind in counts:
-        ans *= counts[kind] + 1
+    for p in dict:
+        ans *= (dict[p] + 1)
     print(ans - 1)
