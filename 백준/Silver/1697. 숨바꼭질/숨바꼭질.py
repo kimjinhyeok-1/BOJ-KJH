@@ -1,18 +1,18 @@
 import sys
 from collections import deque
 input = sys.stdin.readline
-MAX = 100000
-dist = [-1] * (MAX + 1)
-n,k = map(int, input().split())
 
+n,k = map(int, input().split())
+MAX = 1000000
+
+dist = [-1] * (MAX+1)
 dist[n] = 0
 q = deque([n])
+
 while q:
-    v = q.popleft()
-    if v == k:
-        print(dist[v])
-        break
-    for nxt in (v-1, v+1, v*2):
-        if 0<= nxt <= MAX and dist[nxt] == -1:
-            dist[nxt] = dist[v] + 1
-            q.append(nxt)
+    x = q.popleft()
+    for nx in (x-1, x+1, x*2):
+        if 0<= nx <= MAX and dist[nx] == -1:
+            dist[nx] = dist[x] + 1
+            q.append(nx)
+print(dist[k])
