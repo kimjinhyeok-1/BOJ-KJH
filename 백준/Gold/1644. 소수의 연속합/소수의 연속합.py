@@ -3,16 +3,20 @@ input = sys.stdin.readline
 n = int(input())
 
 def sieve(n):
-    p = [True] * (n+1)
-    p[0] = p[1]= False
+    if n < 2:
+        return []
+
+    p = [True] * (n + 1)
+    p[0] = p[1] = False
+
     i = 2
     while i * i <= n:
-        for j in range(i*i, n+1, i):
-            if p[i]:
+        if p[i]:  # i가 소수일 때만 배수 지우기
+            for j in range(i * i, n + 1, i):
                 p[j] = False
         i += 1
-    arr = [i for i in range(2, n+1) if p[i]]
-    return arr
+
+    return [x for x in range(2, n + 1) if p[x]]
 
 pri = sieve(n)
 cur = 0
