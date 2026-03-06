@@ -2,39 +2,38 @@ import sys
 from collections import deque
 input = sys.stdin.readline
 
-M, N = map(int, input().split())
-tomato = [list(map(int, input().split())) for _ in range(N)]
-dist = [[-1] * M for _ in range(N)]
+c,r = map(int,input().split())
+
+t = [list(map(int,input().split())) for _ in range(r)]
+dist = [[-1] * c for _ in range(r)]
+d = [(1,0),(-1,0),(0,1),(0,-1)]
 
 q = deque()
-for x in range(N):
-    for y in range(M):
-        if tomato[x][y] == 1:
-            dist[x][y] = 0
-            q.append((x,y))
 
-dx = [-1, 1, 0, 0]
-dy = [0, 0, -1, 1]
+for i in range(r):
+    for j in range(c):
+        if t[i][j] == 1:
+            dist[i][j] = 0
+            q.append((i,j))
 
 while q:
     a,b = q.popleft()
-    for i in range(4):
-        nx = a + dx[i]
-        ny = b + dy[i]
-        
-        if 0<= nx < N and 0<= ny < M:
-            if tomato[nx][ny] == 0 and dist[nx][ny] == -1:
-                dist[nx][ny] = dist[a][b] + 1
-                tomato[nx][ny] = 1
-                q.append((nx, ny))
+    for da, db in d:
+        na,nb = a+da,b+db
+        if 0<=na<r and 0<=nb<c and t[na][nb] == 0 and dist[na][nb] == -1:
+            dist[na][nb] = dist[a][b] + 1
+            t[na][nb] = 1
+            q.append((na,nb))
+
 
 ans = 0
-for x in range(N):
-    for y in range(M):
-        if tomato[x][y] == 0:
+for p in range(r):
+    for k in range(c):
+        if t[p][k] == 0:
             print(-1)
             exit()
-        elif dist[x][y] > ans:
-            ans = dist[x][y]
-            
+        else:
+            ans = max(dist[p][k], ans)
+
+
 print(ans)
