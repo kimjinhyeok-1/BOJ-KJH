@@ -1,36 +1,63 @@
 import sys
 from collections import deque
+
 input = sys.stdin.readline
 
 n = int(input())
 k = int(input())
-apples = set(tuple(map(int, input().split())) for _ in range(k))
-direc = [(0,1),(1,0),(0,-1),(-1,0)]
-cur_d = 0
-i = 0
-cur_t = 0
-l = int(input())
-dire_ch = deque(list(input().split()) for _ in range(l))
 
-cur_s = deque([(1,1)])
+board = [[0] * (n + 1) for _ in range(n + 1)]
+for _ in range(k):
+    x, y = map(int, input().split())
+    board[x][y] = 1  # 사과
+
+l = int(input())
+turns = {}
+for _ in range(l):
+    t, d = input().split()
+    turns[int(t)] = d
+
+# 우, 하, 좌, 상
+dx = [0, 1, 0, -1]
+dy = [1, 0, -1, 0]
+
+direction = 0
+time = 0
+
+snake = deque([(1, 1)])
+snake_set = {(1, 1)}  # 몸 충돌 체크 빠르게 하려고 같이 사용
+
 while True:
-    cur_t += 1
-    cx,cy = cur_s[0]
-    dx,dy = direc[cur_d]
-    nx,ny = cx+dx, cy+dy
-    if (cur_d == 0 and ny == n+1) or (cur_d == 1 and nx == n+1) or (cur_d == 2 and ny == 0) or (cur_d == 3 and nx == 0) or (nx,ny) in cur_s:
+    time += 1
+
+    head_x, head_y = snake[0]
+    nx = head_x + dx[direction]
+    ny = head_y + dy[direction]
+
+    # 벽 충돌
+    if not (1 <= nx <= n and 1 <= ny <= n):
         break
-    cur_s.appendleft((nx,ny))
-    if (nx,ny) not in apples:
-        cur_s.pop()
+
+    # 몸 충돌
+    if (nx, ny) in snake_set:
+        break
+
+    # 머리 이동
+    snake.appendleft((nx, ny))
+    snake_set.add((nx, ny))
+
+    # 사과가 없으면 꼬리 이동
+    if board[nx][ny] == 0:
+        tail = snake.pop()
+        snake_set.remove(tail)
     else:
-        apples.remove((nx,ny))
-    if dire_ch and cur_t == int(dire_ch[0][0]):
-        t, dr = dire_ch.popleft()
-        if dr == 'D':
-            cur_d += 1
-            if cur_d == 4: cur_d = 0
-        elif dr == 'L':
-            cur_d -= 1
-            if cur_d == -1: cur_d = 3
-print(cur_t)
+        board[nx][ny] = 0  # 사과 먹음
+
+    # 방향 전환
+    if time in turns:
+        if turns[time] == 'D':
+            direction = (direction + 1) % 4
+        else:  # 'L'
+            direction = (direction - 1) % 4
+
+print(time)
