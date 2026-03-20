@@ -18,7 +18,7 @@ while q:
     for dx in range(1,7):
         nx = x + dx
         if nx > 100:
-            break
+            continue
         if move[nx] != 0:
             nx = move[nx]
         if dist[nx] == -1:
