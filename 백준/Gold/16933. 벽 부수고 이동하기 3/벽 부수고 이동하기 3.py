@@ -4,7 +4,7 @@ input = sys.stdin.readline
 
 N, M, K = map(int, input().split())
 grid = [input().strip() for  _ in range(N)]
-visited = [[[0] * (K+1) for _ in range(M)] for _ in range(N)] # 접근을 dist[N][M][K]로 접근
+visited = [[[False] * (K+1) for _ in range(M)] for _ in range(N)] # 접근을 dist[N][M][K]로 접근
 d = [(1,0),(-1,0),(0,1),(0,-1)]
 
 q = deque([(0,0,0)])
