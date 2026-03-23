@@ -20,7 +20,7 @@ while q:
             if new_cost < dist[na][nb]:
                 dist[na][nb] = new_cost
                 if grid[na][nb] == 0:
-                    q.appendleft((na,nb))
+                    q.append((na,nb))
                 else:
                     q.append((na,nb))
 
