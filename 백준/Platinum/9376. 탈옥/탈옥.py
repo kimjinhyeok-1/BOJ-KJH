@@ -20,7 +20,7 @@ def bfs(r,c):
                 if n_v < temp[na][nb]:
                     temp[na][nb] = n_v
                     if grid[na][nb] == '.':
-                        q.appendleft((na,nb))
+                        q.append((na,nb))
                     elif grid[na][nb] == '#':
                         q.append((na,nb))
     return temp
