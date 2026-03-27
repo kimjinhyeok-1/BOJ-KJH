@@ -1,17 +1,17 @@
 import sys
+from collections import deque
 input = sys.stdin.readline
 
 n = int(input())
-r, g, b = map(int, input().split())
-prev = [r, g, b]
 
-for _ in range(n - 1):
-    r, g, b = map(int, input().split())
-    cur = [
-        r + min(prev[1], prev[2]),
-        g + min(prev[0], prev[2]),
-        b + min(prev[0], prev[1])
+rgb = list(map(int, input().split()))
+for _ in range(n-1):
+    r,g,b = map(int, input().split())
+    temp = [
+        min(rgb[1] + r, rgb[2] + r),
+        min(rgb[0] + g, rgb[2] + g),
+        min(rgb[0] + b, rgb[1] + b)
     ]
-    prev = cur
+    rgb = temp
 
-print(min(prev))
+print(min(rgb))
