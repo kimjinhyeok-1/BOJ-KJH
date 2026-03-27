@@ -2,12 +2,14 @@ import sys
 input = sys.stdin.readline
 
 n = int(input())
-lst = list(map(int, input().split()))
 
-uniq = sorted(set(lst))
+nums = list(map(int, input().split()))
+uniq = sorted(set(nums))
 
-mp = {v:i for i, v in enumerate(uniq)}
+k = {v:i for i,v in enumerate(uniq)}
 
-out = [str(mp[x]) for x in lst]
+ans = []
+for num in nums:
+    ans.append(str(k[num]))
 
-print(" ".join(out))
+print(" ".join(ans))
