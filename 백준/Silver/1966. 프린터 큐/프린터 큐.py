@@ -1,22 +1,29 @@
+'''
+우리가 원하는 것: 몇번째로 출력이 되는지
+출력되는 조건: 프린트 했을 때 우리가 원하는 것 출력되면 
+while True:
+---- 특정 조건 -----
+break
+'''
 import sys
 from collections import deque
-input = sys.stdin.readline
+
+
 
 T = int(input())
-
 for _ in range(T):
-    N, M = map(int, input().split())
-    pri = list(map(int, input().split()))
-    dq = deque()
-    for i in range(N):
-        dq.append((pri[i], i == M))
+    q = deque()
     count = 0
+    n, m = map(int, input().split())
+    imp = list(map(int, input().split()))
+    for i in range(n):
+        q.append((i, imp[i]))
     while True:
-        p, mine = dq.popleft()
-        if dq and p < max(x for x, _ in dq):
-            dq.append((p, mine))
+        idx, cur = q.popleft()
+        if any(cur < x[1] for x in q):
+            q.append((idx,cur))
         else:
             count += 1
-            if mine:
+            if idx == m:
                 print(count)
                 break
