@@ -1,7 +1,7 @@
-n = input().split("-")
-result = sum(map(int, n[0].split("+")))
+import sys
+input = sys.stdin.readline
 
-for part in n[1:]:
-    result -= sum(map(int, part.split("+")))
-
-print(result)
+s = input().strip().split('-')
+nums = [sum(map(int, x.split("+"))) for x in s]
+ans = nums[0] - sum(nums[1:])
+print(ans)
