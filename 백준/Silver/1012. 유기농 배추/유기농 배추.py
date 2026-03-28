@@ -3,30 +3,33 @@ from collections import deque
 input = sys.stdin.readline
 
 T = int(input())
-for _ in range(T):
-    M, N, K = map(int, input().split())
+d = [(1,0),(-1,0),(0,1),(0,-1)]
 
-    v = [[0] * M for _ in range(N)]
-    for _ in range(K):
-        a, b = map(int, input().split())
-        v[b][a] = 1
-    d = [(1,0), (-1,0),(0,1),(0,-1)]
-    def bfs(x, y):
-        v[y][x] = 0
-        q = deque([(x, y)])
-        while q:
-            sx, sy = q.popleft()
-            for a, b in d:
-                nx = sx + a
-                ny = sy + b
-                if 0 <= nx < M and 0<= ny < N and v[ny][nx] == 1:
-                    v[ny][nx] = 0
-                    q.append((nx, ny))
-    
+for _ in range(T):
+    m,n,k = map(int, input().split())
+    grid = [[0] * m for _ in range(n)]
+    visited = [[False] * m for _ in range(n)]
     count = 0
-    for i in range(N):
-        for j in range(M):
-            if v[i][j] == 1:
-                bfs(j,i)
+
+    for _ in range(k):
+        j,i = map(int, input().split())
+        grid[i][j] = 1
+
+    def bfs(q):
+        while q:
+            r,c = q.popleft()
+            for dr, dc in d:
+                nr, nc = r+dr, c+dc
+                if 0<= nr< n and 0<= nc < m and grid[nr][nc] == 1 and not visited[nr][nc]:
+                    visited[nr][nc] = True
+                    q.append((nr,nc))
+    for i in range(n):
+        for j in range(m):
+            if not visited[i][j] and grid[i][j] == 1:
+                visited[i][j] = True
+                q = deque([(i,j)])
+                bfs(q)
                 count += 1
-    print(count)    
+    
+
+    print(count)
