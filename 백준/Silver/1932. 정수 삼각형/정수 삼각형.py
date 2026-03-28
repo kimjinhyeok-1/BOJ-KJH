@@ -1,16 +1,18 @@
 import sys
+from collections import deque
 input = sys.stdin.readline
 
 n = int(input())
-ans = [[int(input())]]
+dp = [0] * n
+dp[0] = int(input())
+
 for i in range(1, n):
-    k = list(map(int, input().split()))
-    for j in range(i+1):
+    nums = list(map(int, input().split()))
+    for j in range(i, -1, -1):
         if j == 0:
-            k[j] = ans[i-1][j] + k[j]
+            dp[0] += nums[0]
         elif j == i:
-            k[j] = ans[i-1][j-1] + k[j]
+            dp[j] = dp[j-1] + nums[j]
         else:
-            k[j] = k[j] + max(ans[i-1][j-1], ans[i-1][j])
-    ans.append(k)
-print(max(ans[-1]))
+            dp[j] = nums[j] + max(dp[j], dp[j-1])
+print(max(dp))
