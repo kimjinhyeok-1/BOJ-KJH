@@ -1,26 +1,21 @@
 import sys
 input = sys.stdin.readline
-INF = 10**18
+
 n = int(input())
+grape = [0] + [int(input()) for _ in range(n)]
 
-# gr = [0] + [int(input()) for _ in range(n)]
-# dp = [[0,0,0] for _ in range(n+1)]
-# dp[0][0] = 0
-# dp[0][1] = -INF
-# dp[0][2] = -INF
-# for i in range(1, n+1):
-#     dp[i][0] = max(dp[i-1][0], dp[i-1][1], dp[i-1][2] )
-#     dp[i][1] = dp[i-1][0] + gr[i]
-#     dp[i][2] = dp[i-1][1] + gr[i]
-# print(max(dp[n]))
+if n == 1:
+    print(grape[1])
+    sys.exit()
+dp = [0] * (n+1)
+dp[1] = grape[1]
+dp[2] = grape[1] + grape[2]
 
-ans =  [0, -INF, -INF]
-for _ in range(n):
-    w = int(input())
-    gr = [
-        max(ans[0], ans[1], ans[2]),
-        ans[0] + w,
-        ans[1] + w
-    ]
-    ans = gr
-print(max(ans))
+for i in range(3, n+1):
+    dp[i] = max(
+        dp[i-1],
+        dp[i-3] + grape[i-1] + grape[i],
+        dp[i-2] + grape[i]
+    )
+
+print(dp[n])
