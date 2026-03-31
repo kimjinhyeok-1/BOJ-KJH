@@ -16,11 +16,12 @@ if count_p > 1:
     print('I\'m Sorry Hansoo')
     sys.exit()
 
-left = ''
+left = []
 for ch in sorted(count):
     for _ in range(count[ch] // 2):
-        left += ch
+        left.append(ch)
 
+left = "".join(left)
 right = "".join(reversed(left))
 ans = left + mid + right
 
