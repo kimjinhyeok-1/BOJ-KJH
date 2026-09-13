@@ -1,12 +1,11 @@
 from collections import defaultdict
 
 def solution(clothes):
-    ans = 1
     dic = defaultdict(int)
-    for _, kind in clothes:
-        dic[kind] += 1
+    answer = 1
     
-    for v in dic.values():
-        ans *= (v+1)
-    
-    return ans - 1
+    for clothe, t in clothes:
+        dic[t] += 1
+    for d in dic.values():
+        answer *= (d+1)
+    return answer -1
