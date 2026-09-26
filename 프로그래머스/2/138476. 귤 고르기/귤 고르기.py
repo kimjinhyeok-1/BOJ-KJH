@@ -1,3 +1,4 @@
+"""
 from collections import defaultdict
 def solution(k, tangerine):
     d = defaultdict(int)
@@ -16,3 +17,16 @@ def solution(k, tangerine):
         
         if total >= k:
             return answer
+"""
+from collections import Counter
+
+def solution(k, tangerine):
+    counts = sorted(Counter(tangerine).values(), reverse=True)
+
+    total = 0
+
+    for i, count in enumerate(counts, 1):
+        total += count
+
+        if total >= k:
+            return i
