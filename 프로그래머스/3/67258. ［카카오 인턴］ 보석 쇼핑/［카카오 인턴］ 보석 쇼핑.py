@@ -27,7 +27,7 @@ def solution(gems):
                 continue
             gems_count[gems[e]] += 1
             
-        if len_gc >= total_len:
+        if len_gc == total_len:
             if len_gc == total_len:
                 current_len = e-s
                 if best_len > current_len:
