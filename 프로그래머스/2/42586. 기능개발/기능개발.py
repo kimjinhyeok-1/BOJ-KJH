@@ -1,26 +1,27 @@
 def solution(progresses, speeds):
-    l = len(progresses)
-    deplo_day = []
-    for i in range(l):
-        k = (100-progresses[i] + speeds[i] -1) // speeds[i]
-        deplo_day.append(k)   
-    
-    print(deplo_day)
     answer = []
+    l = len(progresses)
+    deploy_day = []
     
-    max_day = deplo_day[0]
+    for i in range(l):
+        k = ((100 - progresses[i]) - 1)// speeds[i] + 1
+        deploy_day.append(k)
+    
+    max_day = deploy_day[0]
     cnt = 1
     
     for i in range(1,l):
-        if deplo_day[i] <= max_day:
+        next_day = deploy_day[i]
+        if next_day <= max_day:
             cnt += 1
         else:
             answer.append(cnt)
-            max_day = deplo_day[i]
+            max_day = next_day
             cnt = 1
         if i == l-1:
             answer.append(cnt)
+    
     return answer
 
-# (a + b -1) //b
-# 7, 3, 9
+
+
