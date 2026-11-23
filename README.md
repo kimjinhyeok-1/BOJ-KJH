@@ -9,7 +9,7 @@ This is an auto push repository for Baekjoon Online Judge created with [Baekjoon
 
 ### Algorithm
 - BOJ: jinxxang
-- Goal: Silver 안정화 → Gold 하 진입
+- Goal: 코테 통과하기!
 
 ### Links
 - GitHub: kimjinhyeok-1
